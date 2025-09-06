@@ -31,5 +31,11 @@ const slides = ref([
 
 </script>
 
-<style scoped>
+<style>
+.swiper-button-prev, .swiper-button-next {
+  color: white;
+}
+.swiper-pagination-bullet-active {
+    background-color: white;
+}
 </style>
