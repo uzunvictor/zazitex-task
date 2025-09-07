@@ -200,16 +200,6 @@
                                 :disabled="isSubmitting || !form.firstName || !form.lastName || !form.email || !form.subject || !form.message || !form.agreeToPrivacy"
                             />
                         </div>
-
-                        <Message v-if="showSuccess" severity="success">
-                            <div class="flex items-center">
-                                <i class="pi pi-check mr-2"></i>
-                                <div>
-                                    <p class="font-medium">Message sent successfully!</p>
-                                    <p class="text-sm">We'll get back to you within 24 hours.</p>
-                                </div>
-                            </div>
-                        </Message>
                     </form>
                 </template>
             </Card>
@@ -220,7 +210,7 @@
 
 <script setup>
 import {useSeoMeta, useHead} from '#app';
-import {Card, InputText, Textarea, Dropdown, Button, Checkbox, Message} from 'primevue';
+import {Card, InputText, Textarea, Dropdown, Button, Checkbox} from 'primevue';
 import {useToast} from 'primevue/usetoast';
 
 useSeoMeta({
@@ -256,7 +246,6 @@ const form = reactive({
     agreeToPrivacy: false
 });
 const isSubmitting = ref(false);
-const showSuccess = ref(false);
 
 const subjects = [
     {label: 'General Inquiry', value: 'general'},
@@ -270,7 +259,6 @@ const submitForm = async () => {
     isSubmitting.value = true;
     try {
         await new Promise(resolve => setTimeout(resolve, 2000));
-        showSuccess.value = true;
         toast.add({
             severity: 'success',
             summary: 'Message Sent',
