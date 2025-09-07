@@ -145,7 +145,6 @@
                             />
                         </div>
 
-                        <!-- Subject -->
                         <div>
                             <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject *</label>
                             <Dropdown
@@ -192,7 +191,6 @@
                             </label>
                         </div>
 
-                        <!-- Submit Button -->
                         <div class="pt-4">
                             <Button
                                 :label="isSubmitting ? 'Sending...' : 'Send Message'"
@@ -221,11 +219,10 @@
 </template>
 
 <script setup>
-import {useSeoMeta, useHead} from '@unhead/vue';
+import {useSeoMeta, useHead} from '#app';
 import {Card, InputText, Textarea, Dropdown, Button, Checkbox, Message} from 'primevue';
 import {useToast} from 'primevue/usetoast';
 
-// SEO Meta Tags
 useSeoMeta({
     title: 'Line Food Market - Contact Us',
     description: 'Get in touch with Line Food Market. Reach out for inquiries, support, or feedback about our fresh groceries and gourmet products.',
@@ -242,11 +239,9 @@ useSeoMeta({
     twitterImage: 'https://line.com/images/twitter-contact.jpg'
 });
 
-// Additional Head Elements
 useHead({
     link: [
         {rel: 'canonical', href: 'https://line.com/contact'},
-        {rel: 'icon', href: '/favicon.ico'}
     ]
 });
 
@@ -263,7 +258,6 @@ const form = reactive({
 const isSubmitting = ref(false);
 const showSuccess = ref(false);
 
-// Dropdown options for subject
 const subjects = [
     {label: 'General Inquiry', value: 'general'},
     {label: 'Technical Support', value: 'support'},
@@ -275,7 +269,6 @@ const subjects = [
 const submitForm = async () => {
     isSubmitting.value = true;
     try {
-        // Simulate API call (replace with actual /api/contact endpoint)
         await new Promise(resolve => setTimeout(resolve, 2000));
         showSuccess.value = true;
         toast.add({
@@ -284,7 +277,6 @@ const submitForm = async () => {
             detail: 'Thank you for contacting Line Food Market! We’ll get back to you soon.',
             life: 3000
         });
-        // Reset form
         Object.keys(form).forEach(key => {
             form[key] = typeof form[key] === 'boolean' ? false : '';
         });
@@ -303,28 +295,4 @@ const submitForm = async () => {
 </script>
 
 <style lang="scss" scoped>
-/* Tailwind CSS handles most styling, with custom PrimeVue tweaks */
-:deep(.p-card) {
-    @apply bg-white rounded-2xl shadow-lg;
-}
-
-:deep(.p-card-title) {
-    @apply text-2xl font-bold text-gray-900 mb-6;
-}
-
-:deep(.p-inputtext), :deep(.p-dropdown), :deep(.p-textarea) {
-    @apply border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500;
-}
-
-:deep(.p-button) {
-    @apply rounded-lg;
-}
-
-:deep(.p-checkbox .p-checkbox-box) {
-    @apply border-gray-300 rounded focus:ring-2 focus:ring-blue-500;
-}
-
-:deep(.p-checkbox .p-checkbox-box.p-highlight) {
-    @apply bg-blue-600 border-blue-600;
-}
 </style>

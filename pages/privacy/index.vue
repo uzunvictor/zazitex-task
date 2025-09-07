@@ -93,7 +93,7 @@
 </template>
 
 <script setup>
-import { useSeoMeta, useHead } from '@unhead/vue';
+import { useSeoMeta, useHead } from '#app';
 import { Card } from 'primevue';
 
 useSeoMeta({

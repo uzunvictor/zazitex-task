@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { useHead, useSeoMeta } from '#app'
+import { useSeoMeta } from '#app'
 
 useSeoMeta({
     title: 'Line Food Market - Catalog',
