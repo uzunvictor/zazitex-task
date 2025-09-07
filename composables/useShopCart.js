@@ -33,14 +33,6 @@ export const useShopCart = (productRef = null) => {
         return (productRef.value.price * cartProduct.value.qty).toFixed(2);
     });
     
-    const totalItems = computed(() =>
-        [...cart.value.values()].reduce((sum, item) => sum + item.qty, 0)
-    );
-    
-    const totalPrice = computed(() =>
-        [...cart.value.values()].reduce((sum, item) => sum + item.price * item.qty, 0).toFixed(2)
-    );
-    
     const validProductRef = () => {
         if (!productRef?.value) {
             console.error("Product ref is not defined");
@@ -54,6 +46,7 @@ export const useShopCart = (productRef = null) => {
     }
     
     return {
+        cart,
         addToCart,
         cartProduct,
         cartProductsIds,
@@ -63,7 +56,5 @@ export const useShopCart = (productRef = null) => {
         clearCart,
         deleteFromCart,
         productFinalPrice,
-        totalItems,
-        totalPrice,
     };
 };

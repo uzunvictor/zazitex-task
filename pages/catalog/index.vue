@@ -9,6 +9,16 @@
 </template>
 
 <script setup>
+import { useHead, useSeoMeta } from '#app'
+
+useSeoMeta({
+    title: 'Line Food Market - Catalog',
+    description: 'Browse fresh groceries and gourmet products at Line Food Market.',
+    ogTitle: 'Line Food Market - Catalog',
+    ogDescription: 'Browse fresh groceries and gourmet products at Line Food Market.',
+    ogImage: 'https://line.com/images/og-catalog.jpg'
+});
+
 const {data: products} = await useFetch('/api/products', {
     key: 'catalog-products',
     getCachedData(key) {
