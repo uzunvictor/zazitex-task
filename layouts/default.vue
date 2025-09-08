@@ -2,7 +2,7 @@
 <div class="bg-gray-50">
     <Toast />
     <Header/>
-    <div class="container mx-auto">
+    <div class="min-h-[100dvh] container mx-auto">
         <slot/>
     </div>
     <Footer/>
