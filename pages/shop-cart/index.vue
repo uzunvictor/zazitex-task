@@ -1,6 +1,6 @@
 <template>
-<ClientOnly>
-    <main class="max-w-7xl min-h-screen mx-auto px-4 sm:px-6 lg:px-8 py-8 relative">
+<main class="max-w-7xl min-h-screen mx-auto px-4 md:px-6 py-8 relative">
+    <ClientOnly>
         <Transition>
             <div v-if="productsAreLoading"
                  class="fixed top-20 left-0 right-0 bottom-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-sm">
@@ -58,16 +58,16 @@
                                     <Button label="Proceed to Checkout" class="w-full" severity="secondary"
                                             v-tooltip.top="!orderProductsIds.length ? 'Select products to proceed' : ''"
                                             :disabled="!orderProductsIds.length"
-                                            @click="showOrderSection"/>
+                                            @click="toOrderSection"/>
                                 </div>
                             </template>
                         </Card>
                     </div>
                 </Transition>
             </div>
-            <Transition name="slide-down">
-                <div v-if="orderSectionIsVisible && totalItems > 0" ref="orderSection" class="mt-4">
-                    <Card v-show="orderSectionIsVisible" ref="orderSection">
+            <div ref="orderSection" id="orderSection" class="mt-4">
+                <Transition name="slide-down">
+                    <Card v-if="orderSectionIsVisible && totalItems > 0">
                         <template #title>Order Details</template>
                         <template #content>
                             <div class="flex flex-col gap-4">
@@ -85,8 +85,8 @@
                             </div>
                         </template>
                     </Card>
-                </div>
-            </Transition>
+                </Transition>
+            </div>
         </div>
 
         <div v-else-if="!orderSuccessModalIsVisible && !products?.length && !productsAreLoading"
@@ -126,22 +126,20 @@
                 </div>
             </template>
         </Dialog>
-    </main>
-</ClientOnly>
+    </ClientOnly>
+</main>
 </template>
 
 <script setup>
 import {useShopCart} from "/composables/useShopCart.js";
 import {Button, Card, Checkbox, ProgressSpinner} from "primevue";
 import {useToast} from "primevue/usetoast";
-import {useWindowSize} from '@vueuse/core'
 
 definePageMeta({
     pageTransition: false
 })
 
 const toast = useToast();
-const {width: screenWidth} = useWindowSize()
 const {cart, cartProductsIds, cartProductsUniqueKey, cartSize, clearCart, deleteFromCart} = useShopCart()
 
 const {data: products, status: productsStatus} = await useFetch('/api/products', {
@@ -156,7 +154,7 @@ const {data: products, status: productsStatus} = await useFetch('/api/products',
     server: false,
     immediate: !!cartSize.value,
 })
-768
+
 const productsAreLoading = computed(() => productsStatus.value === 'pending');
 const productForDelete = ref(null);
 
@@ -183,12 +181,12 @@ const orderProductsList = computed(() =>
         qty: cart.value.get(p.id)?.qty || 1
     })) || []
 );
+
 const orderSectionEl = useTemplateRef('orderSection')
 const orderSectionIsVisible = ref(false);
-const showOrderSection = () => {
+const toOrderSection = () => {
     orderSectionIsVisible.value = true;
     nextTick(() => {
-        if (screenWidth.value < 767) return
         orderSectionEl.value.scrollIntoView({behavior: 'smooth'});
     })
 }
@@ -241,5 +239,7 @@ const ShopCartProductCard = defineAsyncComponent(() => import('/components/ShopC
 </script>
 
 <style lang="scss" scoped>
-
+#orderSection {
+    scroll-margin-top: 50vh;
+}
 </style>

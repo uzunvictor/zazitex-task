@@ -1,8 +1,8 @@
 <template>
-<div class="min-h-screen bg-gray-50">
+<div class="bg-gray-50">
     <Toast />
     <Header/>
-    <div class="container mx-auto min-h-screen">
+    <div class="container mx-auto">
         <slot/>
     </div>
     <Footer/>

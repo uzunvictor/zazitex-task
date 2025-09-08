@@ -1,5 +1,5 @@
 <template>
-<div class="min-h-screen">
+<main class="max-w-7xl min-h-screen mx-auto px-4 md:px-6 py-8 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <h1 class="text-3xl font-bold text-gray-900">Privacy Policy</h1>
         <p class="mt-2 text-lg text-gray-600">Last updated: September 7, 2025</p>
@@ -89,7 +89,7 @@
             </template>
         </Card>
     </div>
-</div>
+</main>
 </template>
 
 <script setup>
