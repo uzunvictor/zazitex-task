@@ -1,7 +1,7 @@
 <template>
 <main class="max-w-7xl min-h-screen mx-auto px-4 md:px-6 py-8 relative">
-<!--    <MainSlider/>-->
-<!--    <ProductsGrid :products="products" class="mt-8"/>-->
+    <MainSlider/>
+    <ProductsGrid :products="products" class="mt-8"/>
 </main>
 </template>
 
